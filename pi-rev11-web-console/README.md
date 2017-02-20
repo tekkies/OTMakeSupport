@@ -7,3 +7,7 @@ An asynchronous web interface to probe a REV11 stats hub when directly connected
 * [ ] Set up a lightweight web server on the Pi
 * [ ] Build a simple web page to allow commands to be sent to the stats hub
 * [ ] Any messages received on the serial port should be immediately displayed on the web page
+
+## Overview
+
+Built on python3, flask, SocketIO
