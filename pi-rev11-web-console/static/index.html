@@ -1,0 +1,23 @@
+<html>
+
+<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/socket.io/1.3.6/socket.io.min.js"></script>
+<script type="text/javascript" charset="utf-8">
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    socket.on('connect', function() {
+        socket.emit('my event', {data: 'I\'m connected!'});
+    });
+    socket.on('serial', function(data) {
+        $("#log").prepend($('<p>'+data+'</p>').fadeIn('fast'));
+    });
+    function doSend() {
+        socket.emit('serial', 'Button clicked');
+    }
+
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<body>
+<div><p>Edit</p>
+    <input id="clickMe" type="button" value="clickme" onclick="doSend();" />
+</div>
+<div id="log"></div>
+</body>
