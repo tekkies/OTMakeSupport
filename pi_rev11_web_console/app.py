@@ -19,15 +19,6 @@ def root():
 def handle_message(data):
     emit('serial', "TX " + data)
 
-@socketio.on('json')
-def handle_json(json):
-    send(json, json=True)
-
-@socketio.on('my event')
-def handle_my_custom_event(json):
-    emit('my response', json)
-
-
 @socketio.on('connect')
 def connect():
     global router
