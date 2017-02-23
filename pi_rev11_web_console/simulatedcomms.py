@@ -3,7 +3,7 @@ import time
 
 import datetime
 
-class Simuator:
+class SimulatedComms:
 
     def __init__(self, socketio):
         self.socketio = socketio

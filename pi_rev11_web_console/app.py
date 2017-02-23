@@ -8,7 +8,7 @@ from flask import Flask, request, send_from_directory, copy_current_request_cont
 from flask_socketio import SocketIO, send, emit
 import threading
 
-from rev11_simulator import Simuator
+from simulatedcomms import SimulatedComms
 
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
@@ -38,7 +38,7 @@ def connect():
 
 if __name__ == '__main__':
     if sys.argv.__contains__('--start-simulator'):
-        simulator = Simuator(socketio)
+        simulator = SimulatedComms(socketio)
         simulator.simulator_start()
     socketio.run(app)
 
