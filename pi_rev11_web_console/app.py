@@ -43,6 +43,7 @@ def init():
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
+init()
 
 @app.route('/')
 def root():
@@ -62,5 +63,4 @@ def connect():
 
 
 if __name__ == '__main__':
-    init()
     socketio.run(app)
