@@ -12,7 +12,7 @@
     });
     function doSendMessage() {
         var message = document.getElementById('message').value
-        socket.emit('serial', message);
+        socket.emit('command', message);
     }
 
 </script>

@@ -15,9 +15,10 @@ socketio = SocketIO(app)
 def root():
     return app.send_static_file('index.html')
 
-@socketio.on('serial')
+@socketio.on('command')
 def handle_message(data):
-    emit('serial', "TX " + data)
+    global router
+    router.command(data)
 
 @socketio.on('connect')
 def connect():
@@ -33,13 +34,15 @@ class Router:
     def connect(self):
         print "Browser connected"
 
+    def command(self, data):
+        emit('serial', "TX " + data)
+
 
 if __name__ == '__main__':
     global router
     router = Router(socketio)
     if sys.argv.__contains__('--start-simulator'):
-        simulator = SimulatedComms(socketio)
-        simulator.simulator_start()
+        comms = SimulatedComms(socketio)
     socketio.run(app)
 
 	
