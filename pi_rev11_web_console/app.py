@@ -31,11 +31,14 @@ class Router:
     def __init__(self, socketio):
         self.socketio = socketio
 
+    def register_comms(self, comms):
+        self.comms = comms
+
     def connect(self):
         print "Browser connected"
 
     def command(self, data):
-        self.emit('serial', "TX " + data)
+        comms.tx(data)
 
     def emit(self, type, data):
         self.socketio.emit(type, data)
@@ -47,5 +50,3 @@ if __name__ == '__main__':
     if sys.argv.__contains__('--start-simulator'):
         comms = SimulatedComms(router)
     socketio.run(app)
-
-	
