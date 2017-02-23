@@ -1,12 +1,9 @@
 #!/usr/bin/env python3
-import time
-
-import datetime
 
 import sys
-from flask import Flask, request, send_from_directory, copy_current_request_context
+
+from flask import Flask
 from flask_socketio import SocketIO, send, emit
-import threading
 
 from simulatedcomms import SimulatedComms
 
@@ -33,10 +30,22 @@ def handle_my_custom_event(json):
 
 @socketio.on('connect')
 def connect():
-    print "Browser connected"
+    global router
+    router.connect()
+
+
+class Router:
+
+    def __init__(self, socketio):
+        self.socketio = socketio
+
+    def connect(self):
+        print "Browser connected"
 
 
 if __name__ == '__main__':
+    global router
+    router = Router(socketio)
     if sys.argv.__contains__('--start-simulator'):
         simulator = SimulatedComms(socketio)
         simulator.simulator_start()
