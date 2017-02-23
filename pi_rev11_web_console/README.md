@@ -30,4 +30,8 @@ Before the web server can be run, we need to ensure that several components are 
 * Python3
 * [Flask](http://flask.pocoo.org/) micro web server
 
-From this folder, run: `bash install.sh`
+These will be installed for you, if you run the following command on your Pi:
+
+`bash install.sh`
+
+This can take several minutes.

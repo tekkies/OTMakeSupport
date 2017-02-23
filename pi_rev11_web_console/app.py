@@ -8,6 +8,8 @@ from flask import Flask, request, send_from_directory, copy_current_request_cont
 from flask_socketio import SocketIO, send, emit
 import threading
 
+from rev11_simulator import simulator_start
+
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
 socketio = SocketIO(app)
@@ -28,24 +30,16 @@ def handle_json(json):
 def handle_my_custom_event(json):
     emit('my response', json)
 
-def simulator(a,b):
-    while True:
-        time.sleep(5)
-        socketio.emit('serial', "RX simulated message \"%s\"" % datetime.datetime.now().time())
 
 @socketio.on('connect')
 def connect():
     print "Browser connected"
 
-def start_simulator():
-    t = threading.Thread(target=simulator, args=(0, 0))
-    t.daemon = True
-    t.start()
 
 
 if __name__ == '__main__':
     if sys.argv.__contains__('--start-simulator'):
-        start_simulator()
+        simulator_start(socketio)
     socketio.run(app)
 
 	
