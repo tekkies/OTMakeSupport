@@ -6,6 +6,7 @@ from flask import Flask
 from flask_socketio import SocketIO, send, emit
 
 from simulatedcomms import SimulatedComms
+from serialcomms import SerialComms
 
 app = Flask(__name__, static_url_path='')
 app.config['SECRET_KEY'] = 'secret!'
@@ -55,4 +56,6 @@ if __name__ == '__main__':
     router = Router(socketio)
     if sys.argv.__contains__('--start-simulator'):
         comms = SimulatedComms(router)
+    else:
+        comms = SerialComms(router)
     socketio.run(app)
