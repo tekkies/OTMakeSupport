@@ -13,7 +13,7 @@ class SimulatedComms:
         thread.start()
 
     def tx(self, data):
-        self.router.emit('serial', "TX " + data)
+        self.router.tx_confirm(data)
 
     def on_rx(self, data):
         self.router.emit('serial', "RX " + data)

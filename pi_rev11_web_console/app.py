@@ -43,6 +43,9 @@ class Router:
     def emit(self, type, data):
         self.socketio.emit(type, data)
 
+    def tx_confirm(self, data):
+        self.emit('tx', data)
+
 
 if __name__ == '__main__':
     global router
