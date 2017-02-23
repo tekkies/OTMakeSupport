@@ -10,7 +10,7 @@ class SerialComms:
         self.router = router
 
         self.ser = serial.Serial(
-            port="/dev/serial0",
+            port="COM4",
             baudrate=4800,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
@@ -33,6 +33,6 @@ class SerialComms:
     def simulator_main(self, a,b):
         while True:
             rx = self.ser.readline()
-            print rx
+            print(rx)
             self.on_rx(rx)
 

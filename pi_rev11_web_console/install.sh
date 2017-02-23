@@ -22,6 +22,7 @@ function ensure-flask-socketio-installed {
 
 ensure-python3-installed
 ensure-pip3-installed
+sudo apt-get install python3-serial
 # ??? ensure-python3-flask-installed
 sudo pip3 install flask
 ensure-flask-socketio-installed
