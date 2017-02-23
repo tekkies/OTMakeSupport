@@ -13,10 +13,10 @@ class SimulatedComms:
         thread.start()
 
     def tx(self, data):
-        self.router.tx_confirm(data)
+        self.router.on_tx(data)
 
     def on_rx(self, data):
-        self.router.emit('serial', "RX " + data)
+        self.router.on_rx(data)
 
     def simulator_main(self, a,b):
         while True:

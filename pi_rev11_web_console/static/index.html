@@ -7,9 +7,9 @@
         $("#log").prepend($('<p>'+'Browser connected to Pi'+'</p>').fadeIn('fast'));
     });
 
-    socket.on('serial', function(data) {
+    socket.on('rx', function(data) {
         //document.getElementById('log').innerHTML = '<p>'+data+'</p>' + document.getElementById('log').innerHTML;
-        $("#log").prepend($('<p>'+data+'</p>').fadeIn('fast'));
+        $("#log").prepend($('<p>RX '+data+'</p>').fadeIn('fast'));
     });
 
     socket.on('tx', function(data) {
@@ -19,7 +19,7 @@
 
     function doSendMessage() {
         var message = document.getElementById('message').value
-        socket.emit('command', message);
+        socket.emit('tx', message);
     }
 
 </script>

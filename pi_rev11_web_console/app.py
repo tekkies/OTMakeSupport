@@ -15,10 +15,10 @@ socketio = SocketIO(app)
 def root():
     return app.send_static_file('index.html')
 
-@socketio.on('command')
-def handle_message(data):
+@socketio.on('tx')
+def tx(data):
     global router
-    router.command(data)
+    router.tx(data)
 
 @socketio.on('connect')
 def connect():
@@ -37,14 +37,17 @@ class Router:
     def connect(self):
         print "Browser connected"
 
-    def command(self, data):
+    def tx(self, data):
         comms.tx(data)
 
-    def emit(self, type, data):
-        self.socketio.emit(type, data)
+    def on_tx(self, data):
+        self.__emit('tx', data)
 
-    def tx_confirm(self, data):
-        self.emit('tx', data)
+    def on_rx(self, data):
+        self.__emit('rx', data)
+
+    def __emit(self, type, data):
+        self.socketio.emit(type, data)
 
 
 if __name__ == '__main__':
