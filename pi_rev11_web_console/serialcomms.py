@@ -33,6 +33,9 @@ class SerialComms:
     def simulator_main(self, a,b):
         while True:
             rx = self.ser.readline()
+            print("ser.readline()")
+            print(rx)
+            rx = str(rx)
             print(rx)
             self.on_rx(rx)
 
