@@ -10,7 +10,7 @@ class SerialComms:
         self.router = router
 
         self.ser = serial.Serial(
-            port="COM4",
+            port="/dev/serial0",
             baudrate=4800,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
