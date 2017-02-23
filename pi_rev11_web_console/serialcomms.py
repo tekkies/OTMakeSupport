@@ -24,7 +24,7 @@ class SerialComms:
         thread.start()
 
     def tx(self, data):
-        self.ser.write(data+"\n")
+        self.ser.write(bytes(data+"\n", 'utf-8'))
         self.router.on_tx(data)
 
     def on_rx(self, data):
