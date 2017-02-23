@@ -34,6 +34,8 @@ class SerialComms:
         while True:
             rx = self.ser.readline()
             if(len(rx) > 0):
-            	rx = str(rx)
-            	print(rx)
-            	self.on_rx(rx)
+                rx = str(rx)
+                if(rx[:2] == "b'"):
+                    rx = rx[2:]
+                print(rx)
+                self.on_rx(rx)
