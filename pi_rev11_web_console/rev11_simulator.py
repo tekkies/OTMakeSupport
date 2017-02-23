@@ -3,17 +3,18 @@ import time
 
 import datetime
 
-script_socketio = None
+class Simuator:
 
-def simulator(a,b):
-    while True:
-        time.sleep(1)
-        script_socketio.emit('serial', "RX simulated message \"%s\"" % datetime.datetime.now().time())
+    def __init__(self, socketio):
+        self.socketio = socketio
 
-def simulator_start(socketio):
-    global script_socketio
-    script_socketio = socketio
-    t = threading.Thread(target=simulator, args=(0, 0))
-    t.daemon = True
-    t.start()
+    def simulator_main(self, a,b):
+        while True:
+            time.sleep(1)
+            self.socketio.emit('serial', "RX simulated message \"%s\"" % datetime.datetime.now().time())
+
+    def simulator_start(self):
+        t = threading.Thread(target=self.simulator_main, args=(0, 0))
+        t.daemon = True
+        t.start()
 
