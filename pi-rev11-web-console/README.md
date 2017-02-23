@@ -14,7 +14,7 @@ Built on python3, flask, SocketIO
 
 ## Setup
 
-1. [Reconfigure serial port UART0 on the Pi](#Reconfigure serial port UART0 on the Pi)
+1. [Reconfigure serial port UART0 on the Pi](#reconfigure-serial-port-uart0-on-the-pi)
 
 ## Reconfigure serial port UART0 on the Pi
 
