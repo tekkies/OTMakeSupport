@@ -35,14 +35,17 @@ class Router:
         print "Browser connected"
 
     def command(self, data):
-        emit('serial', "TX " + data)
+        self.emit('serial', "TX " + data)
+
+    def emit(self, type, data):
+        self.socketio.emit(type, data)
 
 
 if __name__ == '__main__':
     global router
     router = Router(socketio)
     if sys.argv.__contains__('--start-simulator'):
-        comms = SimulatedComms(socketio)
+        comms = SimulatedComms(router)
     socketio.run(app)
 
 	
