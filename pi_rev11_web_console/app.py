@@ -2,6 +2,8 @@
 import time
 
 import datetime
+
+import sys
 from flask import Flask, request, send_from_directory, copy_current_request_context
 from flask_socketio import SocketIO, send, emit
 import threading
@@ -32,12 +34,18 @@ def simulator(a,b):
         socketio.emit('serial', "RX simulated message \"%s\"" % datetime.datetime.now().time())
 
 @socketio.on('connect')
+def connect():
+    print "Browser connected"
+
 def start_simulator():
-    t = threading.Thread(target=simulator, args=(0,0))
+    t = threading.Thread(target=simulator, args=(0, 0))
     t.daemon = True
     t.start()
 
+
 if __name__ == '__main__':
+    if sys.argv.__contains__('--start-simulator'):
+        start_simulator()
     socketio.run(app)
 
 	
