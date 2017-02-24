@@ -8,10 +8,14 @@
         $("#log").prepend($('<p>'+'Browser connected to Pi'+'</p>').fadeIn('fast'));
     });
 
+    var lastMessage = null;
     socket.on('rx', function(data) {
-        //document.getElementById('log').innerHTML = '<p>'+data+'</p>' + document.getElementById('log').innerHTML;
-        $("#log").prepend($('<p>RX '+data+'</p>').fadeIn('fast'));
-        $( "#prompt" ).stop(true, false).fadeTo(100,1).fadeTo( 1000, 0 );
+        if((lastMessage == ">" && data == "") || (lastMessage == "" && data == ">")) {
+            $( "#prompt" ).stop(true, false).fadeTo(100,1).fadeTo( 1000, 0 );
+        } else {
+            $("#log").prepend($('<p>RX '+data+'</p>').fadeIn('fast'));
+        }
+        lastMessage = data
     });
 
     socket.on('tx', function(data) {
@@ -37,6 +41,4 @@
 <div id="prompt">&gt;</div>
 <h1>Log</h1>
 <div id="log">
-    A<br/>
-    B<br/>
 </div>

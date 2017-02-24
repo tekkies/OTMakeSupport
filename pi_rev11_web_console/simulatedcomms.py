@@ -3,6 +3,9 @@ import time
 
 import datetime
 
+
+
+
 class SimulatedComms:
 
     def __init__(self, router):
@@ -12,16 +15,25 @@ class SimulatedComms:
         thread.daemon = True
         thread.start()
 
+    def simulate_command(self, data):
+        upper_data = data.upper()
+        if(upper_data == "I"):
+            self.on_rx("ID TH IS IS AF AK EI D")
+
     def tx(self, data):
         self.router.on_tx(data)
+        self.simulate_command(data)
 
     def on_rx(self, data):
         self.router.on_rx(data)
 
     def simulator_main(self, a,b):
+        loop = 0
         while True:
             time.sleep(1)
-            #self.on_rx("simulated message \"%s\"" % datetime.datetime.now().time())
-            self.on_rx("")
-            self.on_rx(">")
-
+            if(loop % 10 == 0):
+                self.on_rx("simulated message \"%s\"" % datetime.datetime.now().time())
+            else:
+                self.on_rx("")
+                self.on_rx(">")
+            loop = loop + 1
