@@ -22,6 +22,7 @@
     function doSendMessage() {
         var message = document.getElementById('message').value
         socket.emit('tx', message);
+        document.getElementById('message').value = ""
     }
 
 </script>
@@ -29,9 +30,13 @@
 <body>
 <div>
     <h1>Command</h1>
-    <input type="text" id="message" name="message" value="some command">
+    <input type="text" id="message" name="message" autofocus="autofocus" value="" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('sendMessage').click()">
     <input id="sendMessage" type="button" value="Send" onclick="doSendMessage();" />
 </div>
 <div id="last">Live</div>
 <h1>Log</h1>
-<div id="log"></div>
+<div id="log">
+    A<br/>
+    B<br/>
+</div>
