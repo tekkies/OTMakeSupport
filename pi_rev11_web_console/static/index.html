@@ -11,7 +11,7 @@
     socket.on('rx', function(data) {
         //document.getElementById('log').innerHTML = '<p>'+data+'</p>' + document.getElementById('log').innerHTML;
         $("#log").prepend($('<p>RX '+data+'</p>').fadeIn('fast'));
-        $( "#last" ).stop(true, false).fadeTo(100,1).fadeTo( 3500, 0 );
+        $( "#prompt" ).stop(true, false).fadeTo(100,1).fadeTo( 1000, 0 );
     });
 
     socket.on('tx', function(data) {
@@ -34,7 +34,7 @@
                         document.getElementById('sendMessage').click()">
     <input id="sendMessage" type="button" value="Send" onclick="doSendMessage();" />
 </div>
-<div id="last">Live</div>
+<div id="prompt">&gt;</div>
 <h1>Log</h1>
 <div id="log">
     A<br/>

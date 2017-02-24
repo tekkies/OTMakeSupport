@@ -20,6 +20,8 @@ class SimulatedComms:
 
     def simulator_main(self, a,b):
         while True:
-            time.sleep(3)
-            self.on_rx("simulated message \"%s\"" % datetime.datetime.now().time())
+            time.sleep(1)
+            #self.on_rx("simulated message \"%s\"" % datetime.datetime.now().time())
+            self.on_rx("")
+            self.on_rx(">")
 
