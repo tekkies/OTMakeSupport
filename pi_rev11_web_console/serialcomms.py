@@ -35,7 +35,10 @@ class SerialComms:
             rx = self.ser.readline()
             if(len(rx) > 0):
                 rx = str(rx)
+                print("raw:"+rx)
                 if(rx[:2] == "b'"):
                     rx = rx[2:]
+                if(rx[-5:] == "\\r\\n'"):
+                    rx = rx[:-5]
                 print(rx)
                 self.on_rx(rx)
