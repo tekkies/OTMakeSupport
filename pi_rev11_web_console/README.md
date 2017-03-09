@@ -12,7 +12,7 @@ An asynchronous web interface to probe a REV11 stats hub when directly connected
 
 Built on python3, flask, SocketIO
 
-!![Alt text](https://g.gravizo.com/svg?
+![Alt text](https://g.gravizo.com/svg?
   @startuml;
   title SocketIO message for transmitting serial data;
   Browser --> Flask: browser_to_router;
@@ -21,7 +21,7 @@ Built on python3, flask, SocketIO
   @enduml
 )
 
-!![Alt text](https://g.gravizo.com/svg?
+![Alt text](https://g.gravizo.com/svg?
   @startuml;
   title SocketIO message for receiving serial data;
   Board --> Flask: RS232;
