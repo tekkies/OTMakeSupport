@@ -14,14 +14,21 @@ Built on python3, flask, SocketIO
 
 !![Alt text](https://g.gravizo.com/svg?
   @startuml;
-  title SocketIO message types;
+  title SocketIO message for transmitting serial data;
   Browser --> Flask: browser_to_router;
   Flask --> Board: RS232;
   Flask --> Browser: router_to_browser_echo;
+  @enduml
+)
+
+!![Alt text](https://g.gravizo.com/svg?
+  @startuml;
+  title SocketIO message for receiving serial data;
   Board --> Flask: RS232;
   Flask --> Browser: router_to_browser;
   @enduml
 )
+
 
 ## Setup
 
