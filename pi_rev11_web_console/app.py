@@ -19,14 +19,15 @@ class Router:
     def connect(self):
         print("Browser connected")
 
-    def tx(self, data):
-        self.comms.tx(data)
+    def browser_to_router(self, data):
+        self.comms.router_to_board(data)
 
-    def on_tx(self, data):
-        self.__emit('tx', data)
+    def router_to_browser(self, data):
+        self.__emit('router_to_browser', data)
 
-    def on_rx(self, data):
-        self.__emit('rx', data)
+    def router_to_browser_echo(self, data):
+        self.__emit('Rt', data)
+
 
     def __emit(self, type, data):
         self.socketio.emit(type, data)
@@ -49,10 +50,10 @@ init()
 def root():
     return app.send_static_file('index.html')
 
-@socketio.on('tx')
-def tx(data):
+@socketio.on('browser_to_router')
+def browser_to_router(data):
     global router
-    router.tx(data)
+    router.browser_to_router(data)
 
 @socketio.on('connect')
 def connect():

@@ -12,6 +12,17 @@ An asynchronous web interface to probe a REV11 stats hub when directly connected
 
 Built on python3, flask, SocketIO
 
+!![Alt text](https://g.gravizo.com/svg?
+  @startuml;
+  title SocketIO message types;
+  Browser --> Flask: browser_to_router;
+  Flask --> Board: RS232;
+  Flask --> Browser: router_to_browser_echo;
+  Board --> Flask: RS232;
+  Flask --> Browser: router_to_browser;
+  @enduml
+)
+
 ## Setup
 
 1. [Reconfigure serial port UART0 on the Pi](#reconfigure-serial-port-uart0-on-the-pi)

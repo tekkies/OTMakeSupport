@@ -9,23 +9,23 @@
     });
 
     var lastMessage = null;
-    socket.on('rx', function(data) {
+    socket.on('router_to_browser', function(data) {
         if((lastMessage == ">" && data == "") || (lastMessage == "" && data == ">")) {
             $( "#prompt" ).stop(true, false).fadeTo(100,1).fadeTo( 1000, 0 );
         } else {
-            $("#log").prepend($('<p>RX '+data+'</p>').fadeIn('fast'));
+            $("#log").prepend($('<p>RX'+data+'</p>').fadeIn('fast'));
         }
         lastMessage = data
     });
 
-    socket.on('tx', function(data) {
+    socket.on('router_to_browser_echo', function(data) {
         //document.getElementById('log').innerHTML = '<p>TX'+data+'</p>' + document.getElementById('log').innerHTML;
         $("#log").prepend($('<p>TX '+data+'</p>').fadeOut('fast'));
     });
 
     function doSendMessage() {
         var message = document.getElementById('message').value
-        socket.emit('tx', message);
+        socket.emit('browser_to_router', message);
         document.getElementById('message').value = ""
     }
 

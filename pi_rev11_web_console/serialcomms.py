@@ -23,12 +23,12 @@ class SerialComms:
         thread.daemon = True
         thread.start()
 
-    def tx(self, data):
+    def router_to_board(self, data):
         self.ser.write(bytes(data+"\n", 'utf-8'))
-        self.router.on_tx(data)
+        self.router.router_to_browser_echo(data)
 
-    def on_rx(self, data):
-        self.router.on_rx(data)
+    def on_rx_from_board(self, data):
+        self.router.router_to_browser(data)
 
     def simulator_main(self, a,b):
         while True:
@@ -41,4 +41,4 @@ class SerialComms:
                 if(rx[-5:] == "\\r\\n'"):
                     rx = rx[:-5]
                 print(rx)
-                self.on_rx(rx)
+                self.on_rx_from_board(rx)
