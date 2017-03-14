@@ -35,12 +35,16 @@ class Router:
     def port_change(self, port):
         if self.comms != None:
             self.comms.close()
-        if port == "simulator":
-            self.comms = SimulatedComms(router)
-        else:
-            self.comms = SerialComms(router, port)
-        self.__emit('port_changed', port)
-
+            self.comms = None
+        try:
+            if port == "simulator":
+                self.comms = SimulatedComms(router)
+            else:
+                self.comms = SerialComms(router, port)
+            self.__emit('port_changed', port)
+        except:
+            self.__emit('port_changed', "")
+            self.__emit('router_to_browser_echo', "Error opening port %s" % port)
 
     def __emit(self, type, data):
         self.socketio.emit(type, data)

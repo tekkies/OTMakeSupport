@@ -34,10 +34,15 @@
         socket.emit('port_change', port);
     }
 
-    socket.on('port_changed', function(port) {
-        document.getElementById('sendMessage').disabled = false;
-        document.getElementById('port').value = port;
-        $("#log").prepend($('<p>Connected to '+port+'</p>').fadeOut('fast'));
+    socket.on('port_changed', function(newPort) {
+        document.getElementById('port').value = newPort;
+        if(newPort.length > 0) {
+            document.getElementById('sendMessage').disabled = false;
+            $("#log").prepend($('<p>Connected to '+newPort+'</p>').fadeOut('fast'));
+        } else {
+            document.getElementById('sendMessage').disabled = true;
+            $("#log").prepend($('<p>Comm port disconnected</p>').fadeOut('fast'));
+        }
     });
 
 
@@ -45,6 +50,7 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <body>
 <div>
+    <h1>Port</h1>
     <select onchange="portChange();" id="port">
       <option value=""></option>
       <option value="COM4">COM4</option>
