@@ -13,9 +13,13 @@ class SimulatedComms:
         self.router = router
         self.from_browser = queue.Queue()
         router.register_comms(self)
-        thread = threading.Thread(target=self.simulator_main, args=(0, 0))
-        thread.daemon = True
-        thread.start()
+        self.live = True
+        self.thread = threading.Thread(target=self.simulator_main, args=(0, 0))
+        self.thread.daemon = True
+        self.thread.start()
+
+    def close(self):
+        self.live = False
 
     def simulate_command(self, data):
         upper_data = data.upper()
@@ -34,7 +38,7 @@ class SimulatedComms:
 
     def simulate_command_prompt(self):
         loop = 0
-        while True:
+        while self.live:
             time.sleep(1)
             if (loop % 10 == 0):
                 self.on_rx('=F0%@22CE;X0;T16 10 W0 48 F2 54 W255 0 F255 0;S6 6 18 e;C5;{"@":"12ab","vC|%":0,"L":0,"B|cV":321}')
@@ -46,7 +50,7 @@ class SimulatedComms:
 
     def simulation_test_wake_command_prompt(self):
         loop = 0
-        while True:
+        while self.live:
             if not self.from_browser.empty():
                 rx = self.from_browser.get_nowait()
                 self.simulate_command_prompt()

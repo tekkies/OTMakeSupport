@@ -19,7 +19,6 @@
     });
 
     socket.on('router_to_browser_echo', function(data) {
-        //document.getElementById('log').innerHTML = '<p>TX'+data+'</p>' + document.getElementById('log').innerHTML;
         $("#log").prepend($('<p>TX '+data+'</p>').fadeOut('fast'));
     });
 
@@ -29,10 +28,28 @@
         document.getElementById('message').value = ""
     }
 
+    function portChange() {
+        document.getElementById('sendMessage').disabled = true;
+        var port = document.getElementById('port').value
+        socket.emit('port_change', port);
+    }
+
+    socket.on('port_changed', function(port) {
+        document.getElementById('sendMessage').disabled = false;
+        $("#log").prepend($('<p>Port changed to'+port+'</p>').fadeOut('fast'));
+    });
+
+
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
 <body>
 <div>
+    <select onchange="portChange();" id="port">
+      <option value=""></option>
+      <option value="COM4">COM4</option>
+      <option value="/dev/serial0">/dev/serial0</option>
+      <option value="simulator">simulator</option>
+    </select>
     <h1>Command</h1>
     <input type="text" id="message" name="message" autofocus="autofocus" value="" onkeydown = "if (event.keyCode == 13)
                         document.getElementById('sendMessage').click()">

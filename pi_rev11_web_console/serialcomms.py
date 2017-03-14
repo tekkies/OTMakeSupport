@@ -6,11 +6,11 @@ import datetime
 
 class SerialComms:
 
-    def __init__(self, router):
+    def __init__(self, router, port):
         self.router = router
 
         self.ser = serial.Serial(
-            port="/dev/serial0",
+            port=port,
             baudrate=4800,
             parity=serial.PARITY_NONE,
             stopbits=serial.STOPBITS_ONE,
@@ -22,6 +22,9 @@ class SerialComms:
         thread = threading.Thread(target=self.simulator_main, args=(0, 0))
         thread.daemon = True
         thread.start()
+
+    def close(self):
+        self.ser.close()
 
     def router_to_board(self, data):
         self.ser.write(bytes(data+"\n", 'utf-8'))
