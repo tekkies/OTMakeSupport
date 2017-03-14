@@ -19,6 +19,8 @@ class Router:
         self.comms = comms
 
     def connect(self):
+        if self.comms != None:
+            self.__emit('port_changed', self.comms.port)
         print("Browser connected")
 
     def browser_to_router(self, data):

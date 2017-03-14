@@ -8,7 +8,7 @@ class SerialComms:
 
     def __init__(self, router, port):
         self.router = router
-
+        self.port = port
         self.ser = serial.Serial(
             port=port,
             baudrate=4800,

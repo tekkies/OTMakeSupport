@@ -10,6 +10,7 @@ class SimulatedComms:
 
 
     def __init__(self, router):
+        self.port = "simulator"
         self.router = router
         self.from_browser = queue.Queue()
         router.register_comms(self)

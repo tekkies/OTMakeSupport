@@ -36,7 +36,8 @@
 
     socket.on('port_changed', function(port) {
         document.getElementById('sendMessage').disabled = false;
-        $("#log").prepend($('<p>Port changed to'+port+'</p>').fadeOut('fast'));
+        document.getElementById('port').value = port;
+        $("#log").prepend($('<p>Connected to '+port+'</p>').fadeOut('fast'));
     });
 
 
@@ -53,7 +54,7 @@
     <h1>Command</h1>
     <input type="text" id="message" name="message" autofocus="autofocus" value="" onkeydown = "if (event.keyCode == 13)
                         document.getElementById('sendMessage').click()">
-    <input id="sendMessage" type="button" value="Send" onclick="doSendMessage();" />
+    <input id="sendMessage" type="button" disabled="true" value="Send" onclick="doSendMessage();" />
 </div>
 <div id="prompt" style="opacity: 0">&gt;</div>
 <h1>Log</h1>
