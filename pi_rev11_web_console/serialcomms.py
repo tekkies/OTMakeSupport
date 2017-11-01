@@ -1,8 +1,7 @@
 import threading
-import time
-import serial
 
-import datetime
+import serial #package: pyserial
+
 
 class SerialComms:
 
