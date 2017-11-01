@@ -42,9 +42,9 @@ class Router:
             else:
                 self.comms = SerialComms(router, port)
             self.__emit('port_changed', port)
-        except:
+        except BaseException as e:
             self.__emit('port_changed', "")
-            self.__emit('router_to_browser_echo', "Error opening port %s" % port)
+            self.__emit('router_to_browser_echo', "Error opening port: %s" % e)
 
     def __emit(self, type, data):
         self.socketio.emit(type, data)
